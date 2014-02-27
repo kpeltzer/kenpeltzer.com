@@ -1,6 +1,29 @@
+//Variables, mixins, imports, etc
+
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
+//vars
+$font-family-sans-serif: "Open Sans", sans-serif;
+$font-size-base: 14px;
+
 @import 'sass-bootstrap/lib/bootstrap';
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+@mixin gradient($color: #F5F5F5, $start: #EEE, $stop: #FFF) {
+  background: $color;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($start), to($stop));
+  background: -ms-linear-gradient(bottom,
+                                  $start,
+                                  $stop);
+  background: -moz-linear-gradient(center bottom,
+                                   $start 0%,
+                                   $stop 100%);
+  background: -o-linear-gradient($stop,
+                                 $start);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start)}', endColorstr='#{ie-hex-str($stop)}', GradientType=0); // IE9 and down
+}
 
 @font-face {
   font-family: 'kenpeltzer';
@@ -12,141 +35,94 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
   font-weight: normal;
 }
 
-.page-header {
-    text-align: center;
-}
 
-.masthead {
-    padding-bottom: 40px;
-}
 
-.social-button {
-    font-family: "kenpeltzer";
-    background: #404042;
-    padding: 0.4em 0.85em;
-    border-radius: 15px;
-    color: #ebebeb;
-    font-size: 2.7vw;
-    box-sizing: border-box;
+//Main CSS
+body{
 
-    &.facebook {
-        span:before {
-            content: '\e801';
+    @media (max-width: $screen-xs-max) {
+        font-size: 10px;            
+    }
+
+    .page-header {
+        text-align: center;
+    }
+
+    .masthead {
+        padding-bottom: 40px;
+    }
+
+    .social-button {
+        font-family: "kenpeltzer";
+        background: #404042;
+        padding: 0.4em 0.85em;
+        border-radius: 15px;
+        color: #ebebeb;
+        font-size: 2.7vw;
+        box-sizing: border-box;
+        min-width: 3em;
+        background-size: 100% 90px;
+        background-position: 0 -30px;
+        transition: all 100ms linear;
+        @include gradient(#404042, #2D2D2E, #59595C);
+
+        &:hover {
+            @include gradient(#ebebeb, #C9C9C9, #ebebeb);
+            background-position: 0 0;
+        }
+
+        &.facebook {
+            span:before {
+                content: '\e801';
+            }
+        }
+
+        &.twitter {
+            span:before {
+                content: '\e803';
+            }
+        }
+
+        &.github {
+            span:before {
+                content: '\e804';
+            }
+        }
+
+        &.foursquare {
+            span:before {
+                content: '\e800';
+            }
+        }
+
+        &.linkedin {
+            span:before {
+                content: '\e802';
+            }
         }
     }
 
-    &.twitter {
-        span:before {
-            content: '\e803';
+    .section-link {
+        text-transform: uppercase;
+        a:hover{
+            text-decoration: none;
+        }
+        
+    }
+
+    #aboutme {
+        h1 {
+            font-size: 4.2em;
+        }
+
+        .lead {
+            font-size: 2.2em;
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: 16px;
         }
     }
-
-    &.github {
-        span:before {
-            content: '\e804';
-        }
-    }
-
-    &.foursquare {
-        span:before {
-            content: '\e800';
-        }
-    }
-
-    &.linkedin {
-        span:before {
-            content: '\e802';
-        }
-    }
 }
 
-
-
-
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-
-/* Space out content a bit */
-body {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-    margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-}
-
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
-
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
-}
