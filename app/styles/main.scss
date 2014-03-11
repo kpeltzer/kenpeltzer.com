@@ -1,15 +1,20 @@
+
 //Variables, mixins, imports, etc
 
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
-
-//vars
 $font-family-sans-serif: "Open Sans", sans-serif;
 $font-size-base: 14px;
 
-@import 'sass-bootstrap/lib/bootstrap';
 
+//Text colors
+$black: #505050;
+$black-lighter: lighten($black, 7%);
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+$gray: lighten(#000, 33.5%) !default; // #555
+$light-gray: #b3b3b3;
+$link-color: $gray;
+
+$white: #ffffff;
 
 @mixin gradient($color: #F5F5F5, $start: #EEE, $stop: #FFF) {
   background: $color;
@@ -24,6 +29,14 @@ $font-size-base: 14px;
                                  $start);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start)}', endColorstr='#{ie-hex-str($stop)}', GradientType=0); // IE9 and down
 }
+
+
+//Import Bootstrap
+@import 'sass-bootstrap/lib/bootstrap';
+
+//Import fonts
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 
 @font-face {
   font-family: 'kenpeltzer';
@@ -44,6 +57,10 @@ body{
         font-size: 10px;            
     }
 
+    @media (min-width: $screen-lg) {
+        font-size: 16px;            
+    }
+
     .page-header {
         text-align: center;
     }
@@ -54,21 +71,38 @@ body{
 
     .social-button {
         font-family: "kenpeltzer";
-        background: #404042;
+        background: $white;
         padding: 0.4em 0.85em;
-        border-radius: 15px;
-        color: #ebebeb;
-        font-size: 2.7vw;
+        border-radius: 10px;
+        color: $black;
+        font-size: 2.5em;
         box-sizing: border-box;
         min-width: 3em;
         background-size: 100% 90px;
         background-position: 0 -30px;
         transition: all 100ms linear;
-        @include gradient(#404042, #2D2D2E, #59595C);
+        border-color: #ebebeb;
+        @include gradient($white, $white, $white);
+
+        &:not(:last-child) {
+          margin-right: 2.0em;
+
+          @media (max-width: $screen-xs-max) {
+            margin-right: 0;
+          }
+
+        }
 
         &:hover {
-            @include gradient(#ebebeb, #C9C9C9, #ebebeb);
+            //@include gradient($black, $black, $black-lighter);
+            @include gradient($white, $black, $black-lighter);
             background-position: 0 0;
+            border-color: #d9d9d9;
+            color: $white;
+        }
+
+        &:focus {
+          outline: none;
         }
 
         &.facebook {
@@ -103,11 +137,21 @@ body{
     }
 
     .section-link {
+
         text-transform: uppercase;
-        a:hover{
-            text-decoration: none;
+        text-align: center;
+
+        a {
+          &:hover{
+            text-decoration: underline;
+          }
         }
         
+    }
+
+    .back-button {
+      font-size: 1.2em;
+      margin-left: 1em;
     }
 
     #aboutme {
@@ -119,10 +163,19 @@ body{
             font-size: 2.2em;
         }
 
-        p {
+        p, ul, li {
             line-height: 1.7;
             font-size: 16px;
         }
+    }
+
+    .projects {
+        font-family: 'Lato', sans-serif !important;
+
+        p {
+          color: $light-gray;
+          font-size: 1.1em;
+        } 
     }
 }
 
